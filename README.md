@@ -1,6 +1,7 @@
 # Spiritual Beings Grounding
 
-This contract uses an @openzeppelin ERC721 contract as a base, but can be easily adapted to ERC721A.
+SpiritualBeingsGrounding.sol uses an @openzeppelin ERC721 contract as a base.
+Grounding721A.sol uses Azuki ERC721A as a base.
 
 It uses a "soft-staking" approach that allows users to "ground/stake" their SpiritualBeings NFT without it leaving their wallet.
 
