@@ -15,11 +15,6 @@ contract Grounding721A is ERC721A, Ownable {
   /////////////////////
 
   /**
-   * @dev TESTING ONLY - remove before incorporating into an actual contract
-   */
-  uint256 private s_tokenCounter = 0;
-
-  /**
    * @dev tokenId to grounding start time (0 = not grounding)
    */
   mapping(uint256 => uint256) private s_groundingStarted;
