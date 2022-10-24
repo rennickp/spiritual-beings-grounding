@@ -143,6 +143,16 @@ interface GroundingPeriod {
             "Grounding721A__CurrentlyGrounding"
           )
         })
+
+        it("safeTransferFrom works when not grounding", async () => {
+          await grounding721a.approve(deployer.address, "0")
+          await grounding721a["safeTransferFrom(address,address,uint256)"](
+            deployer.address,
+            grounder.address,
+            "0"
+          )
+          assert.equal(await grounding721a.ownerOf("0"), grounder.address)
+        })
       })
 
       describe("expelFromGrounding", function () {
