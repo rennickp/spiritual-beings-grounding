@@ -64,7 +64,7 @@ interface GroundingPeriod {
 
         it("reverts if grounding is closed", async () => {
           await grounding721a.setGroundingOpen(false)
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await expect(
             grounding721a.toggleGrounding(["0"])
           ).to.be.revertedWithCustomError(
@@ -74,16 +74,24 @@ interface GroundingPeriod {
         })
 
         it("emits Grounded event correctly", async () => {
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await expect(grounding721a.toggleGrounding(["0"]))
             .to.emit(grounding721a, "Grounded")
             .withArgs("0")
         })
 
+        it("grounds correctly as non-owner", async () => {
+          await grounding721a.connect(grounder).mintNft("1")
+          //await grounding721a.connect(grounder).approve(grounder.address, "1")
+          await expect(grounding721a.connect(grounder).toggleGrounding(["1"]))
+            .to.emit(grounding721a, "Grounded")
+            .withArgs("1")
+        })
+
         it("emits Grounded events correctly", async () => {
           await grounding721a.mintNft("1") // mints tokenId "1"
-          await grounding721a.approve(deployer.address, "0")
-          await grounding721a.approve(deployer.address, "1")
+          //await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "1")
           const tx = await grounding721a.toggleGrounding(["0", "1"])
           const txReciept = await tx.wait(1)
           assert.equal(txReciept.events![0].args!.toString(), "0")
