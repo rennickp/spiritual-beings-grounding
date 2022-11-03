@@ -65,8 +65,8 @@ contract Grounding721A is ERC721A, Ownable {
    */
   modifier onlyApprovedOrOwner(uint256 tokenId) {
     if (
-      _ownershipOf(tokenId).addr != msg.sender ||
-      getApproved(tokenId) != msg.sender
+      !(_ownershipOf(tokenId).addr == msg.sender ||
+        getApproved(tokenId) == msg.sender)
     ) {
       revert Grounding721A__NotApprovedOrOwner();
     }
