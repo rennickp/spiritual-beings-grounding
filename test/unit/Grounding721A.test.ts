@@ -82,8 +82,8 @@ interface GroundingPeriod {
 
         it("grounds correctly as non-owner", async () => {
           await grounding721a.connect(grounder).mintNft("1")
-          //await grounding721a.connect(grounder).approve(grounder.address, "1")
-          await expect(grounding721a.connect(grounder).toggleGrounding(["1"]))
+          await grounding721a.connect(grounder).approve(deployer.address, "1")
+          await expect(grounding721a.toggleGrounding(["1"]))
             .to.emit(grounding721a, "Grounded")
             .withArgs("1")
         })
@@ -110,7 +110,7 @@ interface GroundingPeriod {
 
       describe("safeTransferWhileGrounding", function () {
         it("transfers successfully when grounding", async () => {
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await grounding721a.toggleGrounding(["0"])
           await grounding721a.safeTransferWhileGrounding(
             deployer.address,
@@ -121,7 +121,7 @@ interface GroundingPeriod {
         })
 
         it("reverts when not owner", async () => {
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await grounding721a.toggleGrounding(["0"])
           await expect(
             grounding721a
@@ -138,7 +138,7 @@ interface GroundingPeriod {
         })
 
         it("reverts when grounded and not using safeTransferWhileGrounding", async () => {
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await grounding721a.toggleGrounding(["0"])
           await expect(
             grounding721a["safeTransferFrom(address,address,uint256)"](
@@ -153,7 +153,7 @@ interface GroundingPeriod {
         })
 
         it("safeTransferFrom works when not grounding", async () => {
-          await grounding721a.approve(deployer.address, "0")
+          //await grounding721a.approve(deployer.address, "0")
           await grounding721a["safeTransferFrom(address,address,uint256)"](
             deployer.address,
             grounder.address,
